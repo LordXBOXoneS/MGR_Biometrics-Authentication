@@ -1,0 +1,29 @@
+Metryki dla modelu MLP (BiometricNet) - Testowy:
+F1: 0.8571428571428571
+Precyzja: 1.0
+Czułość: 0.75
+AUC: 1.0
+
+Metryki dla modelu LSTM - Testowy:
+F1: 0.0
+Precyzja: 0.0
+Czułość: 0.0
+AUC: 0.25
+
+Metryki dla modelu KNN - Testowy:
+F1: 1.0
+Precyzja: 1.0
+Czułość: 1.0
+AUC: 1.0
+
+Metryki dla modelu SVM - Testowy:
+F1: 0.8571428571428571
+Precyzja: 1.0
+Czułość: 0.75
+AUC: 1.0
+
+Metryki dla modelu RandomForest - Testowy:
+F1: 0.8571428571428571
+Precyzja: 1.0
+Czułość: 0.75
+AUC: 1.0

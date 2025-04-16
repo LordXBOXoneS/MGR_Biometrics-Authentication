@@ -1,0 +1,101 @@
+@startuml
+
+' Konfiguracja stylu (opcjonalne)
+skinparam classAttributeIconSize 0
+skinparam classFontColor #2F4F4F
+skinparam classArrowColor #2F4F4F
+skinparam classBorderColor #2F4F4F
+skinparam backgroundColor #FEFEF0
+
+' ===========================================
+' KLASY WŁASNE (Twoje modele)
+' ===========================================
+class LoginAttempt {
+  + id: AutoField
+  + user: ForeignKey<User> (nullable)
+  + timestamp: DateTimeField
+  + success: BooleanField
+  + method: CharField
+  + details: JSONField
+  --
+  + __str__(): str
+}
+
+class UserProfile {
+  + id: AutoField
+  + user: OneToOneField<User>
+  + phone: CharField
+  + behaviour_security: BooleanField
+  --
+  + __str__(): str
+}
+
+class BehavioralData {
+  + id: AutoField
+  + user: ForeignKey<User>
+  + timestamp: DateTimeField
+  + key_events: JSONField
+  + mouse_events: JSONField
+  + biometric_metrics: JSONField (nullable)
+  + session_id: CharField
+  + login_attempt_number: IntegerField
+  --
+  + __str__(): str
+}
+
+' ===========================================
+' KLASY DLA DJANGO (uproszczone)
+' ===========================================
+class User {
+  + id: AutoField
+  + username: CharField
+  + password: CharField
+  + first_name: CharField
+  + last_name: CharField
+  + email: EmailField
+  + is_staff: BooleanField
+  + is_active: BooleanField
+  + date_joined: DateTimeField
+  --
+  + __str__(): str
+}
+
+class Group {
+  + id: AutoField
+  + name: CharField
+  + permissions: ManyToManyField<Permission>
+}
+
+class Permission {
+  + id: AutoField
+  + name: CharField
+  + content_type: ForeignKey<ContentType>
+  + codename: CharField
+}
+
+class ContentType {
+  + id: AutoField
+  + app_label: CharField
+  + model: CharField
+}
+
+' ===========================================
+' RELACJE
+' ===========================================
+
+' LoginAttempt -> User
+LoginAttempt --> User : user (FK)
+
+' UserProfile -> User
+UserProfile --> User : user (OneToOne)
+
+' BehavioralData -> User
+BehavioralData --> User : user (FK)
+
+' Group -> Permission
+Group --> Permission : permissions (M2M)
+
+' Permission -> ContentType
+Permission --> ContentType : content_type (FK)
+
+@enduml
